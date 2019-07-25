@@ -1,0 +1,52 @@
+<div>
+  <h2>Repository License Fixer</h2>
+  <form #userForm="ngForm" (ngSubmit)="SearchRepositories(userForm)" #githubForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name"
+              required
+              [(ngModel)]="organization.name" name="name"
+              #name="ngModel">
+      <div [hidden]="name.valid || name.pristine"
+            class="alert alert-danger">
+        Name is required
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="timeout" >Submit</button>
+    </div>
+    <table border="1">
+      <thead>
+          <tr>
+              <td>Repository</td>
+              <td>License</td>
+          </tr>
+      </thead>
+      <tr *ngFor="let repository of repositories ">
+          <td>
+              {{repository.name}}
+          </td>
+          <td *ngIf='repository.license; else displayButton'>
+              {{repository.license.name}}
+          </td>
+          <ng-template #displayButton>
+              <button *ngIf='token' type="button" (click)="RequestLicense(repository.full_name)">Request License</button>
+          </ng-template>
+        </tr>
+    </table>
+    <div *ngIf='next'>
+      <button type="button" (click)="GetNextPage(next)">Next  Page</button>
+    </div>
+  </form>
+</div>
+<div>
+  <br>
+  <label>Search Requests Remaining:</label> {{remaining}}
+  <br>
+  <label>Time Out At:</label> {{reset | date : 'h:mm:ss'}}
+  <div *ngIf='post_message'>
+    <h2>{{post_message}}</h2>
+  </div>
+    
+</div>
+  
+
+    

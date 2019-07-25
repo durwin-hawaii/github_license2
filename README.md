@@ -1,27 +1,15 @@
-# GitApp3
+This projects searches github repositories looking for repositories that do not have a license.
+The code was written in Angular (8).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
+There is an option to send a request to the repository owner to create a license.
+To enable this option you need to input your authorization token to the token member of the GithubComponent class
+(line 21 of github.components.ts as of this initial revision)
 
-## Development server
+This project is ready to run in a docker container. I have added some batch/shell files to build it and run it:
+build.bat/build.sh  - will fetch any new code from github then build the container.
+debug.bat/debug.sh  - will run the docker container in interactive shell mode listening on port 8084.
+run.bat/run.sh      - will run the docker container in daemon (background) mode listening on port 8084.
+stop.bat/stop.sh    - will stop the container and remove the image.
+attach.bat/attach.sh- will attach to the container so that you can interact with it.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+If running on linux you might have to make the .sh files executable.
